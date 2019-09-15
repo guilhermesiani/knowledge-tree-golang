@@ -4,7 +4,7 @@ services:
     image: golang:1.13.0
     command: go run main.go
     volumes:
-      - ./src:/go/src/app
-    working_dir: /go/src/app
+      - ./src:/go/src
+    working_dir: /go/src
     ports:
       - "3001:3000"
