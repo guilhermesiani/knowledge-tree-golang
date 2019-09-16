@@ -12,4 +12,4 @@ logs:
 
 .PHONY: test
 test:
-	curl http://127.0.0.1:3001/friend
+	docker-compose exec app go test ./...
