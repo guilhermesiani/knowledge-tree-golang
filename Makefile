@@ -16,4 +16,4 @@ test:
 
 .PHONY: deep-test
 deep-test:
-	curl http://127.0.0.1:3001/myself
+	curl http://127.0.0.1:3001/myself -v
