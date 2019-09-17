@@ -1,13 +1,12 @@
 package main
 
 import (
-    "fmt"
     "log"
     "net/http"
-    "greet"
+    "handlers"
 )
 
 func main() {
-    http.HandleFunc("/", handler)
+    http.HandleFunc("/", handlers.Standard)
     log.Fatal(http.ListenAndServe(":3000", nil))
 }

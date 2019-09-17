@@ -13,3 +13,7 @@ logs:
 .PHONY: test
 test:
 	docker-compose exec app go test ./...
+
+.PHONY: deep-test
+deep-test:
+	curl http://127.0.0.1:3001/myself
