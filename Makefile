@@ -1,6 +1,10 @@
+.PHONY: build
+build:
+	docker-compose build
+
 .PHONY: up
 up:
-	docker-compose up -d --build
+	docker-compose up -d
 
 .PHONY: down
 down:
@@ -17,3 +21,7 @@ test:
 .PHONY: deep-test
 deep-test:
 	curl http://127.0.0.1:3001/myself -v
+
+.PHONY: test-elasticsearch
+test-elasticsearch:
+	curl http://127.0.0.1:9200/_cat/health
