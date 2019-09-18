@@ -25,3 +25,7 @@ deep-test:
 .PHONY: test-elasticsearch
 test-elasticsearch:
 	curl http://127.0.0.1:9200/_cat/health
+
+.PHONY: search-elasticsearch
+search-elasticsearch:
+	curl http://127.0.0.1:9200/_search?pretty
