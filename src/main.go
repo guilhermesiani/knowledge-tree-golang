@@ -1,12 +1,13 @@
 package main
 
 import (
-    "log"
-    "net/http"
-    "handlers"
+	"handlers"
+	"log"
+	"net/http"
 )
 
 func main() {
-    http.HandleFunc("/", handlers.Standard)
-    log.Fatal(http.ListenAndServe(":3000", nil))
+	http.HandleFunc("/getall", handlers.GetAll)
+	http.HandleFunc("/", handlers.Standard)
+	log.Fatal(http.ListenAndServe(":3000", nil))
 }

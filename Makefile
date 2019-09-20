@@ -6,6 +6,14 @@ build:
 up:
 	docker-compose up -d
 
+.PHONY: reset
+reset:
+	docker-compose down && docker-compose up -d
+
+.PHONY: get
+get:
+	docker-compose exec app go get .
+
 .PHONY: down
 down:
 	docker-compose down
@@ -13,6 +21,10 @@ down:
 .PHONY: logs
 logs:
 	docker-compose logs -f
+
+.PHONY: bash
+bash:
+	docker-compose exec app bash
 
 .PHONY: test
 test:
