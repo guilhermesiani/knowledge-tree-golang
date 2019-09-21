@@ -10,9 +10,13 @@ up:
 reset:
 	docker-compose down && docker-compose up -d
 
+.PHONY: restart
+restart:
+	docker-compose restart app
+
 .PHONY: get
 get:
-	docker-compose exec app go get .
+	docker-compose exec app go get ./...
 
 .PHONY: down
 down:
@@ -25,6 +29,10 @@ logs:
 .PHONY: bash
 bash:
 	docker-compose exec app bash
+
+.PHONY: run
+run:
+	docker-compose exec app go run main.go
 
 .PHONY: test
 test:

@@ -1,13 +1,12 @@
 version: '3.7'
 services:
   app:
-    image: golang:1.13.0
+    build: .
     command: go run main.go
     restart: always
     volumes:
-      - ./src:/go/src
-      - ./tests:/go/tests
-    working_dir: /go/src
+      - ./src:/go/src/app
+    working_dir: /go/src/app
     ports:
       - "3001:3000"
     links:

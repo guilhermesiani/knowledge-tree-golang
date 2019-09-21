@@ -1,7 +1,7 @@
 package main
 
 import (
-	"handlers"
+	"app/handlers"
 	"log"
 	"net/http"
 )
