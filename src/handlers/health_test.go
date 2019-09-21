@@ -6,14 +6,14 @@ import (
 	"testing"
 )
 
-func TestHandler(t *testing.T) {
-	req, err := http.NewRequest("GET", "/", nil)
+func TestHealth(t *testing.T) {
+	req, err := http.NewRequest("GET", "/health/ping", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(Standard)
+	handler := http.HandlerFunc(Health)
 
 	handler.ServeHTTP(rr, req)
 
@@ -25,7 +25,7 @@ func TestHandler(t *testing.T) {
 		)
 	}
 
-	expected := `{"maybe": "ok"}`
+	expected := `pong`
 	if rr.Body.String() != expected {
 		t.Errorf(
 			"handler returned unexpected body: got %v want %v",

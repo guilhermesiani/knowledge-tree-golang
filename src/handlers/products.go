@@ -3,6 +3,7 @@ package handlers
 import (
 	"context"
 	"encoding/json"
+	"io/ioutil"
 	"log"
 	"net/http"
 
@@ -14,25 +15,58 @@ type Product struct {
 	Price float32 `json:"price"`
 }
 
-func GetAll(w http.ResponseWriter, r *http.Request) {
+func GetAllProducts(w http.ResponseWriter, r *http.Request) {
 	client, err := elastic.NewClient(elastic.SetURL("http://elasticsearch:9200"))
 
 	if err != nil {
-		log.Fatalf("Fail to connect to elasticsearch")
+		log.Fatalf(err.Error())
+		http.Error(
+			w,
+			"Some error occurred",
+			http.StatusInternalServerError,
+		)
 	}
-
-	Product := Product{
-		Name:  "Babaloo",
-		Price: 3.9,
-	}
-
-	client.Index().Index("siani").Type("products").BodyJson(Product).Do(context.Background())
 
 	res, err := client.Search().
 		Index("siani").
 		Do(context.Background())
 
 	w.Header().Set("Content-Type", "application/json")
-
 	json.NewEncoder(w).Encode(res)
+}
+
+func AddProduct(w http.ResponseWriter, r *http.Request) {
+	body, err := ioutil.ReadAll(r.Body)
+	defer r.Body.Close()
+	if err != nil {
+		log.Fatalf(err.Error())
+		http.Error(w, "Some error occurred", http.StatusInternalServerError)
+	}
+
+	var product Product
+	err = json.Unmarshal(body, &product)
+	if err != nil {
+		log.Fatalf(err.Error())
+		http.Error(w, "Some error occurred", http.StatusInternalServerError)
+	}
+
+	client, err := elastic.NewClient(elastic.SetURL("http://elasticsearch:9200"))
+
+	if err != nil {
+		log.Fatalf(err.Error())
+		http.Error(
+			w,
+			"Some error occurred",
+			http.StatusInternalServerError,
+		)
+	}
+
+	client.Index().
+		Index("siani").
+		Type("products").
+		BodyJson(product).
+		Do(context.Background())
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(product)
 }
