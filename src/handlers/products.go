@@ -7,12 +7,20 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/olivere/elastic"
+	"github.com/olivere/elastic/v7"
 )
 
 type Product struct {
 	Name  string  `json:"name"`
 	Price float32 `json:"price"`
+}
+
+func ProductsHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		AddProduct(w, r)
+		return
+	}
+	GetAllProducts(w, r)
 }
 
 func GetAllProducts(w http.ResponseWriter, r *http.Request) {
