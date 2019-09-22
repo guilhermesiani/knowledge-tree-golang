@@ -12,3 +12,5 @@
 *.out
 
 github.com/
+
+go.sum

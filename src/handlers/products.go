@@ -31,6 +31,8 @@ func GetAllProducts(w http.ResponseWriter, r *http.Request) {
 		Index("siani").
 		Do(context.Background())
 
+	log.Println(res)
+
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(res)
 }
