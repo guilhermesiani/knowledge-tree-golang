@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"net/http"
 	"net/http/httptest"
@@ -51,9 +50,7 @@ func TestGetAllProducts(t *testing.T) {
 		)
 	}
 
-	expected := `[{"name":"TShirt","price":35.1}]`
-	fmt.Println(expected)
-	fmt.Println(rr.Body.String())
+	expected := `[{"name":"TShirt","price":35.1}]` + "\n"
 	if rr.Body.String() != expected {
 		t.Errorf(
 			"handler returned unexpected body: got %v want %v",
