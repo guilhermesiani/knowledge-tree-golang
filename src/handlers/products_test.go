@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"net/http/httptest"
@@ -50,7 +51,9 @@ func TestGetAllProducts(t *testing.T) {
 		)
 	}
 
-	expected := `{"took":5,"hits":{"total":{"value":1,"relation":"eq"},"max_score":1,"hits":[{"_score":1,"_index":"siani","_type":"products","_id":"z_d0W20BlI3uLLSTnOtb","_seq_no":null,"_primary_term":null,"_source":{"name":"TShirt","price":35.1}}]},"_shards":{"total":1,"successful":1,"failed":0}}`
+	expected := `[{"name":"TShirt","price":35.1}]`
+	fmt.Println(expected)
+	fmt.Println(rr.Body.String())
 	if rr.Body.String() != expected {
 		t.Errorf(
 			"handler returned unexpected body: got %v want %v",

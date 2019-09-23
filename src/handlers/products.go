@@ -39,10 +39,33 @@ func GetAllProducts(w http.ResponseWriter, r *http.Request) {
 		Index("siani").
 		Do(context.Background())
 
-	log.Println(res)
+	if err != nil {
+		log.Fatalf(err.Error())
+		http.Error(
+			w,
+			"Some error occurred",
+			http.StatusInternalServerError,
+		)
+	}
+
+	var products []Product
+
+	for _, hit := range res.Hits.Hits {
+		var product Product
+		err := json.Unmarshal(hit.Source, &product)
+		if err != nil {
+			log.Fatalf(err.Error())
+			http.Error(
+				w,
+				"Some error occurred",
+				http.StatusInternalServerError,
+			)
+		}
+		products = append(products, product)
+	}
 
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(res)
+	json.NewEncoder(w).Encode(products)
 }
 
 func AddProduct(w http.ResponseWriter, r *http.Request) {
