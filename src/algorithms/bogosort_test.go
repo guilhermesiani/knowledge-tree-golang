@@ -6,6 +6,8 @@ import (
 )
 
 func TestBogoSort(t *testing.T) {
-	test := [5]int{4,5,6,1,7}
-	assert.Equal(t, [4]int{4,5,6,1}, test)
+	test := [5]int{1,2,3,4,5}
+	bogosort(&test)
+	assert.IsType(t, [5]int{}, test)
+	assert.NotEqual(t, [5]int{1,2,3,4,5}, test)
 }
