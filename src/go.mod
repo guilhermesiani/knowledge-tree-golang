@@ -7,4 +7,5 @@ require (
 	github.com/gorilla/mux v1.7.3
 	github.com/mailru/easyjson v0.7.0 // indirect
 	github.com/olivere/elastic/v7 v7.0.6
+	github.com/stretchr/testify v1.2.2
 )
