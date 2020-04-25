@@ -40,7 +40,7 @@ test:
 
 .PHONY: deep-test
 deep-test:
-	curl http://127.0.0.1:3001/myself -v
+	curl http://127.0.0.1:3001/health/ping -v
 
 .PHONY: test-elasticsearch
 test-elasticsearch:
