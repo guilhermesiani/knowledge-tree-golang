@@ -6,6 +6,6 @@ import (
 )
 
 func TestBinarySearch(t *testing.T) {
-	binarySearchResult := binarySearch(0, [4]int{4,1,0,3}, 0, 4)
+	binarySearchResult := binarySearch([]int{4, 1, 0, 3}, 0)
 	assert.Equal(t, 2, binarySearchResult)
 }
