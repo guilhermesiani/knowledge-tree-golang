@@ -5,7 +5,12 @@ import (
 	"testing"
 )
 
-func TestBinarySearch(t *testing.T) {
-	binarySearchResult := binarySearch([]int{4, 1, 0, 3}, 0)
+func TestBinarySearchSuccess(t *testing.T) {
+	binarySearchResult := binarySearch([]int{0, 1, 3, 4}, 3)
 	assert.Equal(t, 2, binarySearchResult)
+}
+
+func TestBinarySearchFail(t *testing.T) {
+	binarySearchResult := binarySearch([]int{0, 1, 3, 4}, 2)
+	assert.Equal(t, -1, binarySearchResult)
 }
