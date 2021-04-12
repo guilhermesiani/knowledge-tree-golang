@@ -1,10 +1,12 @@
 package algorithms
 
+import "fmt"
+
 func recursiveBinarySearch(v []int, e int) int {
 	minor := 0
 	major := len(v) - 1
 
-	if minor == major {
+	if minor == 0 && minor == major {
 		return -1
 	}
 
@@ -16,9 +18,11 @@ func recursiveBinarySearch(v []int, e int) int {
 	}
 
 	if target > e {
+		fmt.Println("DO NOT PASS TARGET > E")
 		return recursiveBinarySearch(removeHalfUp(v, middle), e) - middle
 	}
 
+	fmt.Println("PASS TARGET > E")
 	return recursiveBinarySearch(removeHalfDown(v, middle), e) + middle
 }
 
