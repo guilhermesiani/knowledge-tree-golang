@@ -1,7 +1,6 @@
 package algorithms
 
 func recursiveBinarySearch(v []int, e int) int {
-	var result int
 	minor := 0
 	major := len(v) - 1
 
@@ -17,12 +16,13 @@ func recursiveBinarySearch(v []int, e int) int {
 	}
 
 	if target > e {
-		result = recursiveBinarySearch(removeHalfUp(v, middle), e)
-	} else {
-		result = recursiveBinarySearch(removeHalfDown(v, middle), e)
-		if result != -1 {
-			return result + middle
-		}
+		return recursiveBinarySearch(removeHalfUp(v, middle), e)
+	}
+
+	result := recursiveBinarySearch(removeHalfDown(v, middle), e)
+
+	if result != -1 {
+		return result + middle
 	}
 
 	return result
