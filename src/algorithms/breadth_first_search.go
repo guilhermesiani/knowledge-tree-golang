@@ -4,8 +4,7 @@ func breadthFirstSearch(friends map[string][]string) string {
 	var graph []string
 	graph = append(graph, friends["mine"]...)
 	var verified []string
-	count := len(graph)
-	for count > 0 {
+	for len(graph) > 0 {
 		friend := graph[0]
 		if !friendWasVerified(&verified, &friend) {
 			if nameFinishWithLe(friend) {
@@ -13,7 +12,6 @@ func breadthFirstSearch(friends map[string][]string) string {
 			}
 			graph = append(graph[:0], graph[1:]...)
 			graph = append(graph, friends[friend]...)
-			count = len(graph)
 			verified = append(verified, friend)
 		}
 	}
@@ -31,7 +29,7 @@ func friendWasVerified(verified *[]string, friend *string) bool {
 }
 
 func nameFinishWithLe(name string) bool {
-	if name[:2] == "le" {
+	if name[len(name)-2:] == "le" {
 		return true
 	}
 
