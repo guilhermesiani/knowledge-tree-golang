@@ -36,7 +36,7 @@ run:
 
 .PHONY: test
 test:
-	docker-compose exec app go test ./...
+	docker-compose exec -T app go test ./...
 
 .PHONY: deep-test
 deep-test:
